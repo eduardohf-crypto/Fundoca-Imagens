@@ -389,11 +389,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
     <div class="q-eyebrow">Pergunta 6 de 6</div>
     <div class="q-text">Qual é a sua faixa de Imposto de Renda?</div>
     <div class="options" id="opts6">
-      <button class="opt" onclick="selecionarOptIR(0,this)"><span class="opt-num">1</span>Isento — não declaro ou minha renda é isenta de IR</button>
-      <button class="opt" onclick="selecionarOptIR(1,this)"><span class="opt-num">2</span>7,5% — renda anual até R$ 33.919,80</button>
-      <button class="opt" onclick="selecionarOptIR(2,this)"><span class="opt-num">3</span>15% — renda anual até R$ 45.012,60</button>
-      <button class="opt" onclick="selecionarOptIR(3,this)"><span class="opt-num">4</span>22,5% — renda anual até R$ 55.976,16</button>
-      <button class="opt" onclick="selecionarOptIR(4,this)"><span class="opt-num">5</span>27,5% — renda anual acima de R$ 55.976,16</button>
+      <button class="opt" onclick="selecionarOptIR(0,this)"><span class="opt-num">1</span>Isento</button>
+      <button class="opt" onclick="selecionarOptIR(1,this)"><span class="opt-num">2</span>7,5%</button>
+      <button class="opt" onclick="selecionarOptIR(2,this)"><span class="opt-num">3</span>15%</button>
+      <button class="opt" onclick="selecionarOptIR(3,this)"><span class="opt-num">4</span>22,5%</button>
+      <button class="opt" onclick="selecionarOptIR(4,this)"><span class="opt-num">5</span>27,5%</button>
     </div>
   </div>
   <button class="btn-back" onclick="irPara(5)">Voltar</button>
@@ -497,11 +497,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
       </div>
       <div class="result-final-grid">
         <div class="result-final-item">
-          <div class="result-final-label">Faixa de IR</div>
+          <div class="result-final-label">Economia estimada no IR</div>
           <div class="result-final-val" id="final-ir">—</div>
         </div>
         <div class="result-final-item">
-          <div class="result-final-label">Abono bruto</div>
+          <div class="result-final-label">Total acumulado estimado</div>
           <div class="result-final-val" id="final-abono">—</div>
         </div>
       </div>
@@ -509,7 +509,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 
     <button class="wpp-btn" onclick="enviarWhats()">
       <svg class="wpp-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.122 1.524 5.853L.057 23.636a.75.75 0 0 0 .916.916l5.783-1.467A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.953-1.356l-.355-.211-3.676.932.948-3.567-.231-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-      Quero fazer o meu aporte agora
+      Falar com a Fusan e investir no Viva Mais
     </button>
     <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:8px">Você será direcionado ao WhatsApp da Fusan — (41) 3307-9222</div>
 
@@ -823,15 +823,23 @@ function atualizarResumoResultado(){
   if(finalInvestido) finalInvestido.textContent=fmt(valorInv);
 
   var finalIr=document.getElementById('final-ir');
-  if(finalIr) finalIr.textContent=irAliqLabel();
+  if(finalIr){
+    var anosProj2=parseInt(document.getElementById('proj-slider').value)||10;
+    var economiaIR=valorInv*irAliq()*anosProj2;
+    finalIr.textContent=irAliq()>0?fmt(economiaIR):'Isento';
+  }
 
   var finalAbono=document.getElementById('final-abono');
-  if(finalAbono) finalAbono.textContent=fmt(abono);
+  if(finalAbono){
+    var anosProj=parseInt(document.getElementById('proj-slider').value)||10;
+    var totalAcumulado=valorInv*((Math.pow(1+TAXA,anosProj)-1)/TAXA);
+    finalAbono.textContent=fmt(totalAcumulado);
+  }
 }
 
 
 function enviarWhats(){
-  window.open('https://wa.me/'+WHATS+'?text='+encodeURIComponent('Quero fazer meu PPM trabalhar para o meu futuro.'),'_blank');
+  window.open('https://wa.me/'+WHATS+'?text='+encodeURIComponent('Olá! Fiz o Diagnóstico do Abono e quero investir no Viva Mais Previdência. Pode me ajudar?'),'_blank');
 }
 
 function selecionarCidade(key,el){
