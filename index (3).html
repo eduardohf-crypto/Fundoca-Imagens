@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Abono — Fusan · Viva Mais Previdência</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#003366;--blue-mid:#0055A4;--blue-light:#ddeaf7;
+  --orange:#F47920;--orange-dark:#C4601A;
+  --green:#1a6e1a;--green-light:#e8f5e9;
+  --red:#c0392b;--red-light:#fdecea;
+  --text:#0f1f33;--text-mid:#4a5a6e;--text-muted:#8a98a8;
+  --border:#dde4ec;--bg:#f2f6fb;--white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.site-header{width:100%;background:var(--blue);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.hdr-fusan{font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
+.hdr-fusan-sub{font-size:9px;color:rgba(255,255,255,.6);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+.hdr-vmp{background:rgba(255,255,255,.1);border-radius:10px;padding:8px 14px;text-align:right}
+.hdr-vmp-name{font-size:13px;font-weight:600;color:#fff}
+.hdr-vmp-sub{font-size:9px;color:rgba(255,255,255,.55);margin-top:2px}
+.wrap{width:100%;max-width:540px;padding:2rem 1.25rem 4rem}
+.screen{display:none}
+.screen.active{display:block}
+.intro-hero{background:var(--white);border-radius:18px;padding:2.5rem 2rem;text-align:center;border:1px solid var(--border);margin-bottom:1rem}
+.intro-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:1rem}
+.intro-title{font-family:'DM Serif Display',serif;font-size:30px;color:var(--blue);line-height:1.25;margin-bottom:.875rem}
+.intro-title em{color:var(--orange);font-style:normal}
+.intro-desc{font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:2rem}
+.intro-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:2rem}
+.intro-stat{background:var(--bg);border-radius:10px;padding:1rem;text-align:center}
+.intro-stat-num{font-size:22px;font-weight:700;color:var(--blue)}
+.intro-stat-lbl{font-size:11px;color:var(--text-muted);margin-top:2px}
+.progress-wrap{margin-bottom:1.5rem}
+.progress-track{display:flex;gap:4px;margin-bottom:6px}
+.progress-step{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+.progress-step.done{background:var(--blue)}
+.progress-step.active{background:var(--orange)}
+.progress-label{font-size:11px;color:var(--text-muted)}
+.card{background:var(--white);border-radius:18px;padding:1.75rem 1.5rem;border:1px solid var(--border);margin-bottom:1rem}
+.q-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.75rem}
+.q-text{font-family:'DM Serif Display',serif;font-size:21px;color:var(--text);line-height:1.3;margin-bottom:1.5rem}
+.salary-wrap{background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:.875rem 1.25rem;margin-bottom:.5rem;display:flex;align-items:center;gap:6px;transition:border-color .15s}
+.salary-wrap:focus-within{border-color:var(--blue)}
+.salary-prefix{font-size:18px;color:var(--text-muted);font-weight:500;flex-shrink:0}
+.salary-input{font-size:32px;font-weight:700;color:var(--blue);border:none;background:transparent;outline:none;width:100%;font-family:'DM Sans',sans-serif;line-height:1}
+.salary-hint{font-size:11px;color:var(--text-muted);margin-bottom:1.25rem}
+.aviso-bruto{background:#fff8f0;border:1px solid #f4c897;border-radius:10px;padding:10px 14px;font-size:12px;color:#7a4a10;line-height:1.5;margin-bottom:1rem}
+.ppm-box{background:var(--blue-light);border-radius:12px;padding:1.25rem;margin-bottom:.75rem}
+.ppm-box-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:.5rem}
+.ppm-box-val{font-size:30px;font-weight:700;color:var(--blue);line-height:1;margin-bottom:4px}
+.ppm-box-sub{font-size:11px;color:var(--text-muted)}
+.options{display:flex;flex-direction:column;gap:6px}
+.opt{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;font-size:13px;color:var(--text);cursor:pointer;transition:all .15s;line-height:1.45;text-align:left;width:100%;font-family:'DM Sans',sans-serif;display:flex;align-items:flex-start;gap:10px}
+.opt:hover{border-color:var(--blue-mid);background:var(--blue-light);color:var(--blue)}
+.opt.selected{border-color:var(--blue);background:var(--blue-light);color:var(--blue);font-weight:600}
+.opt-num{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--text-muted);font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.opt.selected .opt-num{background:var(--blue);color:#fff}
+.btn-primary{width:100%;background:var(--orange);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;margin-top:.5rem}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-primary.blue{background:var(--blue)}
+.btn-primary.blue:hover{background:var(--blue-mid)}
+.btn-back{background:none;border:1.5px solid var(--border);color:var(--text-muted);border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:.5rem;transition:all .15s;width:100%}
+.btn-back:hover{border-color:var(--blue-mid);color:var(--blue)}
+.perfil-banner{border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.25rem}
+.perfil-banner.critico{background:#fdecea;border:1px solid #f5b7b1}
+.perfil-banner.atencao{background:#fef9e7;border:1px solid #f9d78e}
+.perfil-banner.positivo{background:var(--green-light);border:1px solid #a9dfbf}
+.perfil-banner-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.perfil-banner.critico .perfil-banner-label{color:#c0392b}
+.perfil-banner.atencao .perfil-banner-label{color:#d68910}
+.perfil-banner.positivo .perfil-banner-label{color:#1e8449}
+.perfil-banner-text{font-size:13px;line-height:1.65;color:var(--text-mid)}
+.custo-card{background:var(--red-light);border:1px solid #f5b7b1;border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+.custo-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#c0392b;margin-bottom:.75rem}
+.custo-label{font-size:13px;color:#922b21;line-height:1.5;margin-bottom:1rem}
+.custo-breakdown{display:flex;flex-direction:column;gap:6px}
+.custo-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:10px}
+.custo-row.aportes{background:rgba(255,255,255,.6);border:1px solid rgba(192,57,43,.15)}
+.custo-row.rendimento{background:rgba(26,110,26,.08);border:1px solid rgba(26,110,26,.2)}
+.custo-row.total{background:var(--blue);border:1px solid var(--blue)}
+.custo-row.ir-econ{background:#ddeaf7;border:1px solid #a8c8ef}
+.custo-row-label{font-size:12px;font-weight:500}
+.custo-row.aportes .custo-row-label{color:#7a2e0e}
+.custo-row.rendimento .custo-row-label{color:#1a6e1a}
+.custo-row.total .custo-row-label{color:rgba(255,255,255,.85)}
+.custo-row.ir-econ .custo-row-label{color:#0055A4}
+.custo-row-val{font-size:16px;font-weight:700}
+.custo-row.aportes .custo-row-val{color:#c0392b}
+.custo-row.rendimento .custo-row-val{color:#1a6e1a}
+.custo-row.total .custo-row-val{color:#fff}
+.custo-row.ir-econ .custo-row-val{color:#003366}
+.pct-card,.futuro-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+.pct-title,.futuro-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem}
+.pct-question{font-size:14px;color:var(--text-mid);line-height:1.55;margin-bottom:1.25rem}
+.pct-display{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:.5rem}
+.pct-num{font-family:'DM Serif Display',serif;font-size:52px;color:var(--blue);line-height:1}
+.pct-symbol{font-size:24px;font-weight:700;color:var(--blue-mid)}
+.pct-valor-label{font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:1rem}
+.pct-valor-destaque{font-size:18px;font-weight:700;color:var(--orange)}
+input[type=range]{width:100%;height:6px;border-radius:3px;outline:none;cursor:pointer;-webkit-appearance:none;background:var(--border);margin-bottom:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--blue);cursor:pointer;box-shadow:0 2px 8px rgba(0,51,102,.3)}
+.pct-ends{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:1rem}
+.pct-info{background:var(--blue-light);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--blue-mid);line-height:1.5;text-align:center;margin-bottom:1rem}
+.ir-bloco{background:var(--blue-light);border-radius:12px;padding:1.25rem;margin-top:.25rem}
+.ir-bloco-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:.875rem}
+.ir-bloco-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+.ir-bloco-item{background:var(--white);border-radius:10px;padding:10px 14px}
+.ir-bloco-label{font-size:11px;color:var(--text-muted);margin-bottom:4px}
+.ir-bloco-val{font-size:17px;font-weight:700;color:var(--blue)}
+.ir-bloco-custo{display:flex;justify-content:space-between;align-items:center;background:var(--white);border-radius:10px;padding:10px 14px;margin-bottom:.75rem}
+.ir-bloco-custo-label{font-size:12px;color:var(--text-mid);font-weight:500}
+.ir-bloco-custo-val{font-size:16px;font-weight:700;color:var(--blue)}
+.ir-bloco-nota{font-size:10px;color:var(--text-muted);line-height:1.55}
+.futuro-intro{font-size:12px;color:var(--text-mid);line-height:1.55;margin-bottom:1.25rem}
+.proj-slider-wrap{text-align:center;margin-bottom:1.25rem}
+.proj-anos-display{font-family:'DM Serif Display',serif;font-size:48px;color:var(--blue);line-height:1}
+.proj-anos-display span{font-size:22px;font-weight:700;color:var(--blue-mid)}
+.proj-anos-hint{font-size:11px;color:var(--text-muted);margin:.25rem 0 .875rem}
+.proj-anos-ends{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:4px}
+.proj-result{border-radius:14px;overflow:hidden;margin-bottom:1rem}
+.proj-result-header{background:var(--blue);padding:20px 20px 14px}
+.proj-result-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px}
+.proj-result-total{font-family:'DM Serif Display',serif;font-size:38px;color:#fff;line-height:1;margin-bottom:12px}
+.proj-result-bar-wrap{background:rgba(255,255,255,.2);border-radius:3px;height:5px;overflow:hidden;margin-bottom:14px}
+.proj-result-bar-ap{height:100%;border-radius:3px;background:rgba(255,255,255,.5);display:inline-block}
+.proj-result-bar-rend{height:100%;border-radius:3px;background:#fff;display:inline-block}
+.proj-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.proj-result-item{background:rgba(255,255,255,.12);border-radius:10px;padding:10px 14px}
+.proj-result-item-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:4px}
+.proj-result-item-val{font-size:16px;font-weight:700;color:#fff}
+.proj-fiscal{background:var(--blue-light);border-radius:0 0 14px 14px;padding:14px 18px}
+.proj-fiscal-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:.875rem}
+.proj-fiscal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+.proj-fiscal-item{background:var(--white);border-radius:10px;padding:10px 14px}
+.proj-fiscal-item-label{font-size:11px;color:var(--text-muted);margin-bottom:4px}
+.proj-fiscal-item-val{font-size:16px;font-weight:700;color:var(--blue)}
+.proj-fiscal-nota{font-size:10px;color:var(--text-muted);line-height:1.55}
+.disclaimer{font-size:10px;color:var(--text-muted);line-height:1.6;padding:10px 0}
+.wpp-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#25D366;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:.5rem}
+.wpp-btn:hover{background:#1da851}
+.wpp-icon{width:20px;height:20px;flex-shrink:0}
+.footer{width:100%;text-align:center;padding:1.5rem;font-size:11px;color:var(--text-muted);line-height:1.7}
+.card-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:linear-gradient(135deg,#f0287a,#833ab4);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:.5rem;transition:opacity .15s}
+.card-btn:hover{opacity:.88}
+.cidade-hero{background:var(--white);border-radius:18px;padding:2rem 1.5rem;border:1px solid var(--border);margin-bottom:1rem}
+.cidade-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+.cidade-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--blue);line-height:1.25;margin-bottom:.5rem}
+.cidade-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem}
+.cidade-opt{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:13px 18px;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:all .15s;text-align:left;width:100%;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cidade-opt:hover{border-color:var(--blue-mid);background:var(--blue-light);color:var(--blue)}
+.cidade-opt.selected{border-color:var(--blue);background:var(--blue-light);color:var(--blue);font-weight:700}
+.card-preview-wrap{border-radius:18px;overflow:hidden;margin-bottom:1rem;box-shadow:0 8px 32px rgba(0,51,102,.18)}
+.card-preview-wrap img{width:100%;display:block}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.5rem}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.share-btn.download{background:var(--blue);color:#fff}
+.share-btn.download:hover{background:var(--blue-mid)}
+.share-btn.instagram{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+.share-btn.instagram:hover{opacity:.9}
+.share-btn.share{background:var(--green-light);color:var(--green);border:1.5px solid #a9dfbf}
+.share-btn.share:hover{background:#c8eecf}
+.share-dica{font-size:11px;color:var(--text-muted);text-align:center;line-height:1.6;padding:8px 0}
+
+.result-flow-head{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.result-flow-kicker{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:.45rem}
+.result-flow-title{font-family:'DM Serif Display',serif;font-size:28px;line-height:1.2;color:var(--blue);margin-bottom:.4rem}
+.result-flow-sub{font-size:13px;color:var(--text-mid);line-height:1.55;margin-bottom:1rem}
+.result-progress{display:flex;gap:5px;margin-bottom:8px}
+.result-progress-dot{flex:1;height:5px;border-radius:999px;background:var(--border);transition:background .2s,opacity .2s}
+.result-progress-dot.done{background:var(--blue)}
+.result-progress-dot.active{background:var(--orange)}
+.result-progress-label{font-size:11px;color:var(--text-muted)}
+.result-step{display:none}
+.result-step.active{display:block}
+.result-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:.75rem}
+.result-actions.two{grid-template-columns:1fr 1fr}
+.result-actions .btn-primary,.result-actions .btn-back{margin-top:0}
+.result-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.result-mini{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem;text-align:center}
+.result-mini-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px}
+.result-mini-val{font-size:20px;font-weight:700;color:var(--blue);line-height:1.15}
+.result-intro-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.5rem;margin-bottom:1rem}
+.result-intro-title{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.25;color:var(--blue);margin-bottom:.5rem}
+.result-intro-text{font-size:13px;color:var(--text-mid);line-height:1.6}
+.result-final-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.5rem;margin-bottom:1rem;text-align:center}
+.result-final-title{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.25;color:var(--blue);margin-bottom:.5rem}
+.result-final-text{font-size:13px;color:var(--text-mid);line-height:1.65;margin-bottom:1rem}
+.result-final-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:1rem 0}
+.result-final-item{background:var(--bg);border-radius:12px;padding:12px}
+.result-final-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:5px}
+.result-final-val{font-size:17px;font-weight:700;color:var(--blue)}
+.step-hint{font-size:11px;color:var(--text-muted);line-height:1.5;text-align:center;margin-top:.75rem}
+.sim-combo-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:1.1rem;margin-bottom:1rem}
+.sim-combo-title{font-family:'DM Serif Display',serif;font-size:22px;line-height:1.2;color:var(--blue);margin-bottom:.25rem;text-align:center}
+.sim-combo-text{font-size:12px;color:var(--text-mid);line-height:1.45;text-align:center;margin-bottom:.9rem}
+.sim-section{border:1px solid var(--border);border-radius:14px;padding:.95rem;background:#fbfdff;margin-bottom:.75rem}
+.sim-section-title{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:.6rem}
+.sim-control-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:.5rem}
+.sim-big-number{font-family:'DM Serif Display',serif;font-size:34px;line-height:1;color:var(--blue);white-space:nowrap}
+.sim-big-number span:last-child{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;color:var(--blue-mid);margin-left:3px}
+.sim-small-note{font-size:11px;color:var(--text-muted);line-height:1.35;text-align:right}
+.sim-small-note strong{color:var(--orange);font-size:13px}
+.sim-combo-card input[type=range]{height:5px;margin-bottom:4px}
+.sim-combo-card input[type=range]::-webkit-slider-thumb{width:20px;height:20px}
+.compact-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-bottom:.6rem}
+.compact-info{background:var(--blue-light);border-radius:9px;padding:8px 10px;font-size:11px;color:var(--blue-mid);line-height:1.4;text-align:center;margin-bottom:.5rem}
+.compact-ir,.compact-fiscal{background:var(--blue-light);border-radius:10px;padding:.75rem;margin-top:.5rem}
+.compact-ir-title,.compact-fiscal-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue-mid);margin-bottom:.45rem}
+.compact-ir-row{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,85,164,.12)}
+.compact-ir-row strong{color:var(--blue);font-size:12px;white-space:nowrap}
+.compact-ir-row.total{border-bottom:none;font-weight:700}
+.compact-proj{background:var(--blue);border-radius:12px;padding:.95rem;color:#fff;margin-top:.7rem}
+.compact-proj-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.65);margin-bottom:5px}
+.compact-proj-total{font-family:'DM Serif Display',serif;font-size:31px;line-height:1;color:#fff;margin-bottom:.55rem}
+.compact-bar-wrap{height:5px;border-radius:999px;background:rgba(255,255,255,.2);overflow:hidden;display:flex;margin-bottom:.65rem}
+.compact-bar-ap{height:100%;background:rgba(255,255,255,.45)}
+.compact-bar-rend{height:100%;background:#fff}
+.compact-proj-values{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,.78)}
+.compact-proj-values strong{color:#fff;font-size:12px}
+.compact-fiscal .compact-proj-values{color:var(--text-mid)}
+.compact-fiscal .compact-proj-values strong{color:var(--blue)}
+.compact-note{font-size:9.5px;color:var(--text-muted);line-height:1.45;margin-top:.45rem}
+.disclaimer.compact{font-size:9.5px;padding:4px 2px 0;text-align:center}
+
+
+.tabela-ajustavel-card{padding:1.35rem 1.25rem}
+.tabela-controles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:1rem 0 .85rem}
+.tabela-control{background:rgba(255,255,255,.72);border:1px solid rgba(192,57,43,.16);border-radius:12px;padding:.75rem .8rem}
+.tabela-control-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:.45rem;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#7a2e0e}
+.tabela-control-top strong{font-size:16px;color:var(--blue);white-space:nowrap;letter-spacing:0;text-transform:none}
+.tabela-control input[type=range]{height:4px;margin:0 0 3px;background:#f4c897}
+.tabela-control input[type=range]::-webkit-slider-thumb{width:18px;height:18px;background:var(--blue)}
+.tabela-control-meta{font-size:10px;color:#7a4a10;line-height:1.35;text-align:center}
+.tabela-control-meta span{font-weight:700;color:var(--orange)}
+@media(max-width:480px){.tabela-controles{grid-template-columns:1fr}.tabela-ajustavel-card{padding:1.2rem 1rem}}
+
+@media(max-width:480px){.intro-title{font-size:24px}.q-text{font-size:19px}.proj-item-total{font-size:28px}.pct-num{font-size:42px}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div><div class="hdr-fusan">FUSAN</div><div class="hdr-fusan-sub">Fundação Sanepar</div></div>
+  <div class="hdr-vmp"><div class="hdr-vmp-name">Viva Mais Previdência</div><div class="hdr-vmp-sub">Diagnóstico Abono</div></div>
+</header>
+
+<div class="wrap">
+
+<!-- S0: INTRO -->
+<div class="screen active" id="s0">
+  <div class="intro-hero">
+    <div class="intro-eyebrow">Fusan · Diagnóstico Abono</div>
+    <h1 class="intro-title">Seu Abono pode<br>trabalhar por <em>você.</em></h1>
+    <p class="intro-desc">Responda a 6 perguntas e descubra quanto você já poderia ter acumulado — e o que ainda pode construir com o Viva Mais Previdência.</p>
+    <div class="intro-stats">
+      <div class="intro-stat"><div class="intro-stat-num">6</div><div class="intro-stat-lbl">Perguntas rápidas</div></div>
+      <div class="intro-stat"><div class="intro-stat-num">2 min</div><div class="intro-stat-lbl">Para completar</div></div>
+    </div>
+    <button class="btn-primary" onclick="irPara(1)">Começar o diagnóstico</button>
+  </div>
+</div>
+
+<!-- S1: SALÁRIO -->
+<div class="screen" id="s1">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+    </div>
+    <div class="progress-label">Pergunta 1 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 1 de 6</div>
+    <div class="q-text">Qual é o seu salário bruto mensal?</div>
+    <div class="salary-wrap">
+      <span class="salary-prefix">R$</span>
+      <input class="salary-input" type="text" id="salary-input" inputmode="numeric" placeholder="0" value="4.500" oninput="formatarSalario(this)">
+    </div>
+    <div class="salary-hint">Digite o seu salário bruto mensal</div>
+    <div class="aviso-bruto">Os valores abaixo são <strong>brutos</strong>. O Abono tem caráter indenizatório — consulte seu regime tributário para verificar incidência de IR.</div>
+    <div class="ppm-box">
+      <div class="ppm-box-label">Seu Abono estimado (bruto)</div>
+      <div class="ppm-box-val" id="ppm-total">R$ 8.175,90</div>
+      <div class="ppm-box-sub">(Salário × 110%) + R$ 3.225,90</div>
+    </div>
+  </div>
+  <button class="btn-primary blue" onclick="avancarQ1()">Continuar</button>
+  <button class="btn-back" onclick="irPara(0)">Voltar</button>
+</div>
+
+<!-- S2: ANOS RECEBENDO -->
+<div class="screen" id="s2">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+    </div>
+    <div class="progress-label">Pergunta 2 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 2 de 6</div>
+    <div class="q-text">Há quantos anos você recebe o Abono?</div>
+    <div class="options" id="opts2">
+      <button class="opt" onclick="selecionarOpt(2,1,this)"><span class="opt-num">1</span>Este é o meu primeiro ano</button>
+      <button class="opt" onclick="selecionarOpt(2,2,this)"><span class="opt-num">2</span>2 anos</button>
+      <button class="opt" onclick="selecionarOpt(2,3,this)"><span class="opt-num">3</span>3 anos</button>
+      <button class="opt" onclick="selecionarOpt(2,4,this)"><span class="opt-num">4</span>4 anos</button>
+      <button class="opt" onclick="selecionarOpt(2,5,this)"><span class="opt-num">5</span>5 anos ou mais</button>
+    </div>
+  </div>
+  <button class="btn-back" onclick="irPara(1)">Voltar</button>
+</div>
+
+<!-- S3: COMPORTAMENTO -->
+<div class="screen" id="s3">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+    </div>
+    <div class="progress-label">Pergunta 3 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 3 de 6</div>
+    <div class="q-text">Quando o Abono cai na conta, o que costuma acontecer?</div>
+    <div class="options" id="opts3">
+      <button class="opt" onclick="selecionarOpt(3,1,this)"><span class="opt-num">1</span>Já estava comprometido antes de receber — as contas esperavam por esse dinheiro</button>
+      <button class="opt" onclick="selecionarOpt(3,2,this)"><span class="opt-num">2</span>Gasto com necessidades da família e, no fim do mês, o valor já acabou</button>
+      <button class="opt" onclick="selecionarOpt(3,3,this)"><span class="opt-num">3</span>Vai todo para dívidas — nem chega de verdade às minhas mãos</button>
+      <button class="opt" onclick="selecionarOpt(3,4,this)"><span class="opt-num">4</span>Guardo uma parte, mas o restante some sem que eu perceba onde foi</button>
+      <button class="opt" onclick="selecionarOpt(3,5,this)"><span class="opt-num">5</span>Invisto tudo — esse dinheiro já tem dono, e esse dono sou eu</button>
+    </div>
+  </div>
+  <button class="btn-back" onclick="irPara(2)">Voltar</button>
+</div>
+
+<!-- S4: CONSCIÊNCIA -->
+<div class="screen" id="s4">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div>
+    </div>
+    <div class="progress-label">Pergunta 4 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 4 de 6</div>
+    <div class="q-text">Você acompanha quanto recebeu de Abono ao longo dos anos?</div>
+    <div class="options" id="opts4">
+      <button class="opt" onclick="selecionarOpt(4,1,this)"><span class="opt-num">1</span>Nunca parei para calcular — não faço ideia do total recebido</button>
+      <button class="opt" onclick="selecionarOpt(4,2,this)"><span class="opt-num">2</span>Tenho uma noção vaga, mas nunca fiz as contas com precisão</button>
+      <button class="opt" onclick="selecionarOpt(4,3,this)"><span class="opt-num">3</span>Sei aproximadamente quanto recebi, mas não acompanho para onde foi</button>
+      <button class="opt" onclick="selecionarOpt(4,4,this)"><span class="opt-num">4</span>Acompanho e já tenho parte investida ou guardada</button>
+    </div>
+  </div>
+  <button class="btn-back" onclick="irPara(3)">Voltar</button>
+</div>
+
+<!-- S5: PLANO -->
+<div class="screen" id="s5">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div>
+    </div>
+    <div class="progress-label">Pergunta 5 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 5 de 6</div>
+    <div class="q-text">Qual é o seu plano para o Abono deste ano?</div>
+    <div class="options" id="opts5">
+      <button class="opt" onclick="selecionarOpt(5,1,this)"><span class="opt-num">1</span>Nenhum plano — provavelmente vai seguir o mesmo caminho dos anos anteriores</button>
+      <button class="opt" onclick="selecionarOpt(5,2,this)"><span class="opt-num">2</span>Quero usar para pagar dívidas ou cobrir despesas que estão pendentes</button>
+      <button class="opt" onclick="selecionarOpt(5,3,this)"><span class="opt-num">3</span>Penso em guardar uma parte, mas ainda não decidi onde nem quanto</button>
+      <button class="opt" onclick="selecionarOpt(5,4,this)"><span class="opt-num">4</span>Já decidi investir — quero colocar no Viva Mais Previdência</button>
+    </div>
+  </div>
+  <button class="btn-back" onclick="irPara(4)">Voltar</button>
+</div>
+
+<!-- S6: IMPOSTO DE RENDA -->
+<div class="screen" id="s6">
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div>
+    </div>
+    <div class="progress-label">Pergunta 6 de 6</div>
+  </div>
+  <div class="card">
+    <div class="q-eyebrow">Pergunta 6 de 6</div>
+    <div class="q-text">Qual é a sua faixa de Imposto de Renda?</div>
+    <div class="options" id="opts6">
+      <button class="opt" onclick="selecionarOptIR(0,this)"><span class="opt-num">1</span>Isento</button>
+      <button class="opt" onclick="selecionarOptIR(1,this)"><span class="opt-num">2</span>7,5%</button>
+      <button class="opt" onclick="selecionarOptIR(2,this)"><span class="opt-num">3</span>15%</button>
+      <button class="opt" onclick="selecionarOptIR(3,this)"><span class="opt-num">4</span>22,5%</button>
+      <button class="opt" onclick="selecionarOptIR(4,this)"><span class="opt-num">5</span>27,5%</button>
+    </div>
+  </div>
+  <button class="btn-back" onclick="irPara(5)">Voltar</button>
+</div>
+
+<!-- S7: RESULTADO -->
+<div class="screen" id="s7">
+
+  <div class="result-flow-head">
+    <div class="result-flow-kicker">Resultado do diagnóstico</div>
+    <div class="result-flow-title">Veja seu resultado em partes.</div>
+    <div class="result-flow-sub">A tabela abaixo pode ser ajustada pelos controles de percentual e prazo, sem separar a simulação em outra tela.</div>
+    <div class="result-progress" id="result-progress">
+      <span class="result-progress-dot active"></span>
+      <span class="result-progress-dot"></span>
+      <span class="result-progress-dot"></span>
+    </div>
+    <div class="result-progress-label" id="result-progress-label">Passo 1 de 3 · Seu perfil</div>
+  </div>
+
+  <!-- Resultado passo 1: perfil -->
+  <div class="result-step active" id="result-step-0">
+    <div class="result-intro-card">
+      <div class="result-intro-title">Primeiro, entenda o seu perfil.</div>
+      <div class="result-intro-text">Com base nas respostas, o diagnóstico mostra como o Abono vem sendo usado e qual oportunidade existe para transformar esse dinheiro em patrimônio.</div>
+    </div>
+
+    <div id="perfil-banner" class="perfil-banner critico">
+      <div class="perfil-banner-label" id="perfil-label"></div>
+      <div class="perfil-banner-text" id="perfil-text"></div>
+    </div>
+
+    <div class="result-mini-grid">
+      <div class="result-mini">
+        <div class="result-mini-label">Abono estimado</div>
+        <div class="result-mini-val" id="result-abono-anual">—</div>
+      </div>
+      <div class="result-mini">
+        <div class="result-mini-label">Histórico informado</div>
+        <div class="result-mini-val" id="result-anos">—</div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-primary blue" onclick="irParaResultado(1)">Ver minha simulação</button>
+      <button class="btn-back" onclick="irPara(6)">Voltar para ajustar respostas</button>
+    </div>
+  </div>
+
+  <!-- Resultado passo 2: tabela ajustável -->
+  <div class="result-step" id="result-step-1">
+    <div class="custo-card tabela-ajustavel-card">
+      <div class="custo-title">O que você poderia ter hoje</div>
+      <div class="custo-label" id="custo-label"></div>
+
+      <div class="tabela-controles">
+        <div class="tabela-control">
+          <div class="tabela-control-top">
+            <span>Percentual do Abono</span>
+            <strong><span id="pct-num">50</span>%</strong>
+          </div>
+          <input type="range" id="pct-slider" min="10" max="100" value="50" step="5" oninput="atualizarPct()">
+          <div class="tabela-control-meta" id="pct-info">Equivale a <span id="pct-valor-reais">R$ 0</span> por ano</div>
+        </div>
+
+        <div class="tabela-control">
+          <div class="tabela-control-top">
+            <span>Prazo da simulação</span>
+            <strong><span id="proj-anos-num">10</span> anos</strong>
+          </div>
+          <input type="range" id="proj-slider" min="1" max="25" value="10" step="1" oninput="atualizarProj()">
+          <div class="tabela-control-meta" id="futuro-intro">Arraste para ajustar o período.</div>
+        </div>
+      </div>
+
+      <div class="custo-breakdown" id="custo-breakdown"></div>
+      <div class="disclaimer compact">Valores brutos estimados. Rentabilidade de 10% a.a. com base no desempenho histórico do Viva Mais Previdência. Pode haver incidência de Imposto de Renda. Rentabilidade passada não é garantia de rentabilidade futura.</div>
+    </div>
+
+    <div class="result-actions two">
+      <button class="btn-back" onclick="irParaResultado(0)">Voltar</button>
+      <button class="btn-primary blue" onclick="irParaResultado(2)">Próximo passo</button>
+    </div>
+  </div>
+
+  <!-- Resultado passo 3: ação -->
+  <div class="result-step" id="result-step-2">
+    <div class="result-final-card">
+      <div class="result-final-title">Agora é transformar simulação em decisão.</div>
+      <div class="result-final-text">Seu diagnóstico mostra que o Abono pode ser usado de forma mais estratégica. O próximo passo é falar com a Fusan e fazer o aporte no Viva Mais Previdência.</div>
+
+      <div class="result-final-grid">
+        <div class="result-final-item">
+          <div class="result-final-label">Você escolheu investir</div>
+          <div class="result-final-val" id="final-pct">50%</div>
+        </div>
+        <div class="result-final-item">
+          <div class="result-final-label">Valor anual estimado</div>
+          <div class="result-final-val" id="final-investido">—</div>
+        </div>
+      </div>
+      <div class="result-final-grid">
+        <div class="result-final-item">
+          <div class="result-final-label">Economia estimada no IR</div>
+          <div class="result-final-val" id="final-ir">—</div>
+        </div>
+        <div class="result-final-item">
+          <div class="result-final-label">Total acumulado estimado</div>
+          <div class="result-final-val" id="final-abono">—</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="wpp-btn" onclick="enviarWhats()">
+      <svg class="wpp-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.122 1.524 5.853L.057 23.636a.75.75 0 0 0 .916.916l5.783-1.467A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.953-1.356l-.355-.211-3.676.932.948-3.567-.231-.368A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+      Falar com a Fusan e investir no Viva Mais
+    </button>
+    <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:8px">Você será direcionado ao WhatsApp da Fusan — (41) 3307-9222</div>
+
+    <button class="card-btn" onclick="irPara(8)" style="margin-top:.75rem">
+      📸 Card Instagram Fundoca
+    </button>
+
+    <div class="result-actions two" style="margin-top:10px">
+      <button class="btn-back" onclick="irParaResultado(1)">Voltar</button>
+      <button class="btn-back" onclick="reiniciar()">Refazer</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- S8: ESCOLHA DA CIDADE -->
+<div class="screen" id="s8">
+  <div class="cidade-hero">
+    <div class="cidade-eyebrow">Fundações Sanepar</div>
+    <h2 class="cidade-title">Qual é a sua cidade?</h2>
+    <p class="cidade-sub">Escolha a cidade do evento para gerar o seu card.</p>
+    <div id="cidade-opts">
+      <button class="cidade-opt" onclick="selecionarCidade('foz',this)">📍 Foz do Iguaçu</button>
+      <button class="cidade-opt" onclick="selecionarCidade('toledo',this)">📍 Toledo</button>
+      <button class="cidade-opt" onclick="selecionarCidade('pato',this)">📍 Pato Branco</button>
+      <button class="cidade-opt" onclick="selecionarCidade('francisco',this)">📍 Francisco Beltrão</button>
+      <button class="cidade-opt" onclick="selecionarCidade('cascavel',this)">📍 Cascavel</button>
+    </div>
+  </div>
+  <button class="btn-primary" id="btn-gerar-card" onclick="gerarCard()" disabled style="opacity:.4">Gerar meu card →</button>
+  <button class="btn-back" onclick="irPara(7)">← Voltar</button>
+</div>
+
+<!-- S9: CARD GERADO -->
+<div class="screen" id="s9">
+  <div class="card-preview-wrap">
+    <img id="card-img" src="" alt="Card Instagram Jornada do Cuidado">
+  </div>
+  <div class="share-grid">
+    <button class="share-btn download" onclick="downloadCard()">
+      ⬇️ Baixar
+    </button>
+    <button class="share-btn instagram" onclick="compartilharCard()">
+      📲 Compartilhar
+    </button>
+  </div>
+  <div class="share-dica">Salve o card e publique nos seus stories do Instagram com a hashtag <strong>#JornadaDoCuidado</strong> 🎉</div>
+  <button class="btn-back" onclick="irPara(8)">← Escolher outra cidade</button>
+</div>
+</div>
+
+<div class="footer">Fusan — Fundação Sanepar de Previdência e Assistência Social · Viva Mais Previdência</div>
+
+<script>
+var CIDADES={
+  cascavel:  {label:'Cascavel',         img:'https://raw.githubusercontent.com/eduardohf-crypto/Fundoca-Imagens/main/Card_Fundoca_Cascavel.jpg'},
+  foz:       {label:'Foz do Iguaçu',    img:'https://raw.githubusercontent.com/eduardohf-crypto/Fundoca-Imagens/main/Card_Fundoca_Foz_do_Igua%C3%A7u.jpg'},
+  francisco: {label:'Francisco Beltrão',img:'https://raw.githubusercontent.com/eduardohf-crypto/Fundoca-Imagens/main/Card_Fundoca_Francisco_Beltr%C3%A3o.jpg'},
+  pato:      {label:'Pato Branco',      img:'https://raw.githubusercontent.com/eduardohf-crypto/Fundoca-Imagens/main/Card_Fundoca_Pato_Branco.jpg'},
+  toledo:    {label:'Toledo',           img:'https://raw.githubusercontent.com/eduardohf-crypto/Fundoca-Imagens/main/Card_Fundoca_Toledo.jpg'}
+};
+var CIDADE_SELECIONADA=null;
+var WHATS='554133079222', TAXA=0.10;
+var PCT=50, IR_IDX=4;
+var RESULT_STEP=0;
+var RESULT_TITULOS=['Seu perfil','Simulação','Próximo passo'];
+var resp={salario:4500,q2:0,q3:0,q4:0,q5:0};
+var IR_ALIQUOTAS=[0,0.075,0.15,0.225,0.275];
+var IR_LABELS=['Isento','7,5%','15%','22,5%','27,5%'];
+
+function calcAbono(s){return s*1.10+3225.90;}
+function irAliq(){return IR_ALIQUOTAS[IR_IDX];}
+function irAliqLabel(){return IR_LABELS[IR_IDX];}
+function fmtNum(v){return v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmt(v){return 'R$ '+fmtNum(v);}
+
+function formatarSalario(el){
+  var raw=el.value.replace(/\D/g,'');
+  var num=parseInt(raw)||0;
+  if(raw===''){el.value='';resp.salario=0;atualizarSalario();return;}
+  el.value=num.toLocaleString('pt-BR');
+  resp.salario=num;
+  atualizarSalario();
+}
+
+function atualizarSalario(){
+  var s=resp.salario||0;
+  document.getElementById('ppm-total').textContent=s<100?'—':fmt(calcAbono(s));
+}
+
+function avancarQ1(){
+  if(!resp.salario||resp.salario<100){alert('Por favor, informe o seu salário bruto.');return;}
+  irPara(2);
+}
+
+function irPara(n){
+  document.querySelectorAll('.screen').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('s'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n===7) gerarResultado();
+}
+
+function reiniciar(){
+  resp={salario:4500,q2:0,q3:0,q4:0,q5:0};
+  PCT=50;
+  IR_IDX=4;
+  document.getElementById('salary-input').value='4.500';
+  atualizarSalario();
+  document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected');});
+  irPara(0);
+}
+
+function selecionarOpt(q,val,el){
+  document.getElementById('opts'+q).querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  resp['q'+q]=val;
+  setTimeout(function(){irPara(q+1);},350);
+}
+
+function selecionarOptIR(idx,el){
+  document.getElementById('opts6').querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  IR_IDX=idx;
+  setTimeout(function(){irPara(7);},350);
+}
+
+function anosFromQ2(){return resp.q2||0;}
+
+function calcPassado(anos){
+  if(!anos) return{aportes:0,rendimento:0,total:0};
+  var abono=calcAbono(resp.salario);
+  var parcela=Math.round(abono/2);
+  var i=TAXA/12;
+  var hoje=new Date();
+  var anoAtual=hoje.getFullYear();
+  var mesAtual=hoje.getMonth();
+  var totalFV=0,totalAp=0;
+  for(var y=0;y<anos;y++){
+    var anoAp=anoAtual-anos+y;
+    var mAbril=Math.max((anoAtual-anoAp)*12+(mesAtual-3),0);
+    var mSet=Math.max((anoAtual-anoAp)*12+(mesAtual-8),0);
+    totalFV+=parcela*Math.pow(1+i,mAbril)+parcela*Math.pow(1+i,mSet);
+    totalAp+=abono;
+  }
+  return{aportes:Math.round(totalAp),rendimento:Math.round(totalFV-totalAp),total:Math.round(totalFV)};
+}
+
+function calcFuturo(anos){
+  var investido=calcAbono(resp.salario)*(PCT/100);
+  var total=investido*((Math.pow(1+TAXA,anos)-1)/TAXA);
+  return{aportes:investido*anos,rendimento:total-investido*anos,total:total};
+}
+
+function atualizarBlocoIR(){
+  var blocoEl=document.getElementById('ir-bloco');
+  if(!blocoEl) return;
+  var aliq=irAliq();
+  var valorInv=calcAbono(resp.salario)*(PCT/100);
+  if(aliq===0){blocoEl.style.display='none';return;}
+  blocoEl.style.display='block';
+  var economia=valorInv*aliq;
+  var custo=valorInv-economia;
+  document.getElementById('ir-ano').textContent=(new Date().getFullYear()+1);
+  document.getElementById('ir-voce-investe').textContent=fmt(valorInv);
+  document.getElementById('ir-economizado').textContent=fmt(economia);
+  document.getElementById('ir-custo-real').textContent=fmt(custo);
+}
+
+function atualizarTabelaCusto(){
+  var sliderAnos=document.getElementById('proj-slider');
+  var anos=sliderAnos?parseInt(sliderAnos.value):10;
+  var abono=calcAbono(resp.salario);
+  var valorAno=abono*(PCT/100);
+  var total=valorAno*((Math.pow(1+TAXA,anos)-1)/TAXA);
+  var aportes=valorAno*anos;
+  var rendimento=total-aportes;
+  var aliq=irAliq();
+  var economiaIR=valorAno*aliq*anos;
+
+  var custoLabel=document.getElementById('custo-label');
+  if(custoLabel){
+    custoLabel.textContent='Com '+PCT+'% do seu Abono investido por '+anos+' '+(anos===1?'ano':'anos')+', a estimativa seria:';
+  }
+
+  var custoBreakdown=document.getElementById('custo-breakdown');
+  if(custoBreakdown){
+    custoBreakdown.innerHTML=
+      '<div class="custo-row aportes"><span class="custo-row-label">Seus aportes ('+anos+' × '+fmt(valorAno)+')</span><span class="custo-row-val">'+fmt(aportes)+'</span></div>'+ 
+      '<div class="custo-row rendimento"><span class="custo-row-label">Rentabilidade acumulada (10% a.a.)</span><span class="custo-row-val">+'+fmt(rendimento)+'</span></div>'+ 
+      '<div class="custo-row total"><span class="custo-row-label">Total estimado bruto</span><span class="custo-row-val">'+fmt(total)+'</span></div>'+ 
+      (aliq>0?'<div class="custo-row ir-econ"><span class="custo-row-label">Economia estimada no IR ('+irAliqLabel()+')</span><span class="custo-row-val">+'+fmt(economiaIR)+'</span></div>':'');
+  }
+}
+
+function atualizarPct(){
+  PCT=parseInt(document.getElementById('pct-slider').value);
+  var valorInv=calcAbono(resp.salario)*(PCT/100);
+  var pctNum=document.getElementById('pct-num');
+  var pctValor=document.getElementById('pct-valor-reais');
+  var pctInfo=document.getElementById('pct-info');
+  if(pctNum) pctNum.textContent=PCT;
+  if(pctValor) pctValor.textContent=fmt(valorInv);
+  if(pctInfo) pctInfo.innerHTML='Equivale a <span id="pct-valor-reais">'+fmt(valorInv)+'</span> por ano';
+  atualizarBlocoIR();
+  atualizarFuturoIntro();
+  atualizarTabelaCusto();
+  atualizarResumoResultado();
+}
+
+function atualizarFuturoIntro(){
+  var el=document.getElementById('futuro-intro');
+  if(!el) return;
+  var anos=parseInt(document.getElementById('proj-slider').value)||10;
+  el.textContent='Simulação por '+anos+' '+(anos===1?'ano':'anos')+'.';
+}
+
+function atualizarProj(){
+  var slider=document.getElementById('proj-slider');
+  var anos=slider?parseInt(slider.value):10;
+  var anosNum=document.getElementById('proj-anos-num');
+  if(anosNum) anosNum.textContent=anos;
+  atualizarFuturoIntro();
+  atualizarTabelaCusto();
+  atualizarResumoResultado();
+}
+
+function gerarResultado(){
+  var anos=anosFromQ2();
+  var abono=calcAbono(resp.salario);
+  PCT=50;
+  document.getElementById('pct-slider').value=50;
+  var valorInv=abono*(PCT/100);
+  document.getElementById('pct-num').textContent=PCT;
+  document.getElementById('pct-valor-reais').textContent=fmt(valorInv);
+  document.getElementById('pct-info').innerHTML='Equivale a <span id="pct-valor-reais">'+fmt(valorInv)+'</span> por ano';
+
+  var score=resp.q3;
+  if(resp.q4===1) score--;
+  if(resp.q4===4) score++;
+  if(resp.q5===4) score++;
+  if(resp.q5===1) score--;
+  score=Math.min(Math.max(score,1),6);
+
+  var banner=document.getElementById('perfil-banner');
+  var label=document.getElementById('perfil-label');
+  var text=document.getElementById('perfil-text');
+  if(score<=2){
+    banner.className='perfil-banner critico';
+    label.textContent='Atenção — o Abono está comprometido antes de chegar';
+    text.textContent='O Abono é consumido por obrigações e compromissos antes mesmo de ele chegar. Esse padrão se repete ano após ano e o impacto acumulado é maior do que aparenta. Veja abaixo o que já seria possível ter construído nesse período.';
+  } else if(score===3){
+    banner.className='perfil-banner critico';
+    label.textContent='Atenção — o Abono some sem deixar rastro';
+    text.textContent='O Abono é gasto sem um destino claro — e ao final você não consegue dizer para onde foi. Com um planejamento simples é possível mudar esse ciclo e fazer esse dinheiro trabalhar pelo seu futuro.';
+  } else if(score===4){
+    banner.className='perfil-banner atencao';
+    label.textContent='Quase lá — ainda há espaço para melhorar';
+    text.textContent='Você já tem alguma consciência sobre o Abono e guarda uma parte. Mas imagine se todo o valor — ou pelo menos uma parte — fosse investido de forma planejada no Viva Mais Previdência. O resultado seria muito diferente.';
+  } else {
+    banner.className='perfil-banner positivo';
+    label.textContent='Parabéns — você já pensa como investidor';
+    text.textContent='Você acompanha o Abono e já tem um plano para ele. Agora é o momento de formalizar isso no Viva Mais Previdência e ver o poder dos juros compostos trabalhar por você, ano após ano.';
+  }
+
+  var prazoInicial=Math.max(1,anos||1);
+  prazoInicial=Math.min(prazoInicial,25);
+  var projSlider=document.getElementById('proj-slider');
+  if(projSlider) projSlider.value=prazoInicial;
+
+  atualizarBlocoIR();
+  atualizarPct();
+  atualizarProj();
+  atualizarResumoResultado();
+  irParaResultado(0);
+}
+
+
+function irParaResultado(idx){
+  RESULT_STEP=Math.max(0,Math.min(idx,2));
+  document.querySelectorAll('.result-step').forEach(function(el){el.classList.remove('active');});
+  var atual=document.getElementById('result-step-'+RESULT_STEP);
+  if(atual) atual.classList.add('active');
+
+  document.querySelectorAll('.result-progress-dot').forEach(function(el,i){
+    el.classList.remove('active','done');
+    if(i<RESULT_STEP) el.classList.add('done');
+    if(i===RESULT_STEP) el.classList.add('active');
+  });
+
+  var label=document.getElementById('result-progress-label');
+  if(label) label.textContent='Passo '+(RESULT_STEP+1)+' de 3 · '+RESULT_TITULOS[RESULT_STEP];
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function atualizarResumoResultado(){
+  var abono=calcAbono(resp.salario);
+  var anos=anosFromQ2();
+  var valorInv=abono*(PCT/100);
+
+  var elAbono=document.getElementById('result-abono-anual');
+  if(elAbono) elAbono.textContent=fmt(abono);
+
+  var elAnos=document.getElementById('result-anos');
+  if(elAnos) elAnos.textContent=anos<=1?'Primeiro ano':anos+' anos';
+
+  var finalPct=document.getElementById('final-pct');
+  if(finalPct) finalPct.textContent=PCT+'%';
+
+  var finalInvestido=document.getElementById('final-investido');
+  if(finalInvestido) finalInvestido.textContent=fmt(valorInv);
+
+  var finalIr=document.getElementById('final-ir');
+  if(finalIr){
+    var anosProj2=parseInt(document.getElementById('proj-slider').value)||10;
+    var economiaIR=valorInv*irAliq()*anosProj2;
+    finalIr.textContent=irAliq()>0?fmt(economiaIR):'Isento';
+  }
+
+  var finalAbono=document.getElementById('final-abono');
+  if(finalAbono){
+    var anosProj=parseInt(document.getElementById('proj-slider').value)||10;
+    var totalAcumulado=valorInv*((Math.pow(1+TAXA,anosProj)-1)/TAXA);
+    finalAbono.textContent=fmt(totalAcumulado);
+  }
+}
+
+
+function enviarWhats(){
+  window.open('https://wa.me/'+WHATS+'?text='+encodeURIComponent('Olá! Fiz o Diagnóstico do Abono e quero investir no Viva Mais Previdência. Pode me ajudar?'),'_blank');
+}
+
+function selecionarCidade(key,el){
+  document.querySelectorAll('.cidade-opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  CIDADE_SELECIONADA=key;
+  var btn=document.getElementById('btn-gerar-card');
+  btn.disabled=false;
+  btn.style.opacity='1';
+}
+
+function gerarCard(){
+  if(!CIDADE_SELECIONADA) return;
+  var cidade=CIDADES[CIDADE_SELECIONADA];
+  document.getElementById('card-img').src=cidade.img;
+  irPara(9);
+}
+
+function downloadCard(){
+  if(!CIDADE_SELECIONADA) return;
+  var cidade=CIDADES[CIDADE_SELECIONADA];
+  var a=document.createElement('a');
+  a.href=cidade.img;
+  a.download='Card_Fundoca_'+cidade.label.replace(/ /g,'_')+'.jpg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function compartilharCard(){
+  if(!CIDADE_SELECIONADA) return;
+  var cidade=CIDADES[CIDADE_SELECIONADA];
+  if(navigator.share){
+    fetch(cidade.img)
+      .then(function(r){return r.blob();})
+      .then(function(blob){
+        var file=new File([blob],'Card_Fundoca_'+cidade.label+'.jpg',{type:'image/jpeg'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          return navigator.share({
+            files:[file],
+            title:'Jornada do Cuidado e da Conexão',
+            text:'Participei da Jornada do Cuidado promovida pelas Fundações Sanepar! #JornadaDoCuidado #FundaçõesSanepar'
+          });
+        } else {
+          return navigator.share({
+            title:'Jornada do Cuidado e da Conexão',
+            text:'Participei da Jornada do Cuidado promovida pelas Fundações Sanepar! #JornadaDoCuidado #FundaçõesSanepar'
+          });
+        }
+      })
+      .catch(function(){downloadCard();});
+  } else {
+    downloadCard();
+  }
+}
+
+atualizarSalario();
+</script>
+</body>
+</html>
