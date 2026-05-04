@@ -299,9 +299,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 <div class="screen" id="s1">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+      <div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
     </div>
-    <div class="progress-label">Pergunta 1 de 6</div>
+    <div class="progress-label">Pergunta 1 de 4</div>
   </div>
   <div class="card">
     <div class="q-eyebrow">Pergunta 1 de 6</div>
@@ -326,12 +326,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 <div class="screen" id="s2">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+      <div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div>
     </div>
-    <div class="progress-label">Pergunta 2 de 6</div>
+    <div class="progress-label">Pergunta 2 de 4</div>
   </div>
   <div class="card">
-    <div class="q-eyebrow">Pergunta 2 de 6</div>
+    <div class="q-eyebrow">Pergunta 2 de 4</div>
     <div class="q-text">Há quantos anos você recebe o Abono?</div>
     <div class="options" id="opts2">
       <button class="opt" onclick="selecionarOpt(2,1,this)"><span class="opt-num">1</span>Este é o meu primeiro ano</button>
@@ -344,59 +344,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
   <button class="btn-back" onclick="irPara(1)">Voltar</button>
 </div>
 
-<!-- S3: COMPORTAMENTO -->
-<div class="screen" id="s3">
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
-    </div>
-    <div class="progress-label">Pergunta 3 de 6</div>
-  </div>
-  <div class="card">
-    <div class="q-eyebrow">Pergunta 3 de 6</div>
-    <div class="q-text">Quando o Abono cai na conta, o que costuma acontecer?</div>
-    <div class="options" id="opts3">
-      <button class="opt" onclick="selecionarOpt(3,1,this)"><span class="opt-num">1</span>Já estava comprometido antes de receber — as contas esperavam por esse dinheiro</button>
-      <button class="opt" onclick="selecionarOpt(3,2,this)"><span class="opt-num">2</span>Gasto com necessidades da família e, no fim do mês, o valor já acabou</button>
-      <button class="opt" onclick="selecionarOpt(3,3,this)"><span class="opt-num">3</span>Vai todo para dívidas — nem chega de verdade às minhas mãos</button>
-      <button class="opt" onclick="selecionarOpt(3,4,this)"><span class="opt-num">4</span>Guardo uma parte, mas o restante some sem que eu perceba onde foi</button>
-      <button class="opt" onclick="selecionarOpt(3,5,this)"><span class="opt-num">5</span>Invisto tudo — esse dinheiro já tem dono, e esse dono sou eu</button>
-    </div>
-  </div>
-  <button class="btn-back" onclick="irPara(2)">Voltar</button>
-</div>
-
-<!-- S4: CONSCIÊNCIA -->
-<div class="screen" id="s4">
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div>
-    </div>
-    <div class="progress-label">Pergunta 4 de 6</div>
-  </div>
-  <div class="card">
-    <div class="q-eyebrow">Pergunta 4 de 6</div>
-    <div class="q-text">Você acompanha quanto recebeu de Abono ao longo dos anos?</div>
-    <div class="options" id="opts4">
-      <button class="opt" onclick="selecionarOpt(4,1,this)"><span class="opt-num">1</span>Nunca parei para calcular — não faço ideia do total recebido</button>
-      <button class="opt" onclick="selecionarOpt(4,2,this)"><span class="opt-num">2</span>Tenho uma noção vaga, mas nunca fiz as contas com precisão</button>
-      <button class="opt" onclick="selecionarOpt(4,3,this)"><span class="opt-num">3</span>Sei aproximadamente quanto recebi, mas não acompanho para onde foi</button>
-      <button class="opt" onclick="selecionarOpt(4,4,this)"><span class="opt-num">4</span>Acompanho e já tenho parte investida ou guardada</button>
-    </div>
-  </div>
-  <button class="btn-back" onclick="irPara(3)">Voltar</button>
-</div>
-
 <!-- S5: PLANO -->
 <div class="screen" id="s5">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div>
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div>
     </div>
-    <div class="progress-label">Pergunta 5 de 6</div>
+    <div class="progress-label">Pergunta 3 de 4</div>
   </div>
   <div class="card">
-    <div class="q-eyebrow">Pergunta 5 de 6</div>
+    <div class="q-eyebrow">Pergunta 3 de 4</div>
     <div class="q-text">Qual é o seu plano para o Abono deste ano?</div>
     <div class="options" id="opts5">
       <button class="opt" onclick="selecionarOpt(5,1,this)"><span class="opt-num">1</span>Nenhum plano — provavelmente vai seguir o mesmo caminho dos anos anteriores</button>
@@ -405,19 +362,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
       <button class="opt" onclick="selecionarOpt(5,4,this)"><span class="opt-num">4</span>Já decidi investir — quero colocar no Viva Mais Previdência</button>
     </div>
   </div>
-  <button class="btn-back" onclick="irPara(4)">Voltar</button>
+  <button class="btn-back" onclick="irPara(2)">Voltar</button>
 </div>
 
 <!-- S6: IMPOSTO DE RENDA -->
 <div class="screen" id="s6">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div>
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div>
     </div>
-    <div class="progress-label">Pergunta 6 de 6</div>
+    <div class="progress-label">Pergunta 4 de 4</div>
   </div>
   <div class="card">
-    <div class="q-eyebrow">Pergunta 6 de 6</div>
+    <div class="q-eyebrow">Pergunta 4 de 4</div>
     <div class="q-text">Qual é a sua faixa de Imposto de Renda?</div>
     <div class="options" id="opts6">
       <button class="opt" onclick="selecionarOptIR(0,this)"><span class="opt-num">1</span>Isento</button>
@@ -457,20 +414,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 <!-- S7: RESULTADO -->
 <div class="screen" id="s7">
 
-  <div class="result-flow-head">
-    <div class="result-flow-kicker">Resultado do diagnóstico</div>
-    <div class="result-flow-title">Veja seu resultado em partes.</div>
-    <div class="result-flow-sub">A tabela abaixo pode ser ajustada pelos controles de percentual e prazo, sem separar a simulação em outra tela.</div>
-    <div class="result-progress" id="result-progress">
-      <span class="result-progress-dot active"></span>
-      <span class="result-progress-dot"></span>
-      <span class="result-progress-dot"></span>
+  <!-- Resultado passo REVELAÇÃO -->
+  <div class="result-step active" id="result-step-rev">
+    <div style="background:linear-gradient(160deg,#001f4d 0%,#003366 100%);border-radius:22px;padding:3rem 2rem;text-align:center;margin-bottom:1rem;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem" id="rev-label">Com 100% do seu Abono investido por 10 anos</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:.75rem">você poderia ter acumulado</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:52px;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem" id="rev-total">R$ 0</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:2.5rem">estimativa bruta · 10% a.a.</div>
+      <button style="background:#F47920;color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="irParaResultado(1)">Ver o detalhamento →</button>
+      <button style="background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);border-radius:10px;padding:10px 24px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:12px" onclick="irPara(6)">← Voltar</button>
     </div>
-    <div class="result-progress-label" id="result-progress-label">Passo 1 de 3 · Seu perfil</div>
   </div>
 
   <!-- Resultado passo 1: perfil -->
-  <div class="result-step active" id="result-step-0">
+  <div class="result-step" id="result-step-0" style="display:none">
     <div class="result-intro-card">
       <div class="result-intro-title">Primeiro, entenda o seu perfil.</div>
       <div class="result-intro-text">Com base nas respostas, o diagnóstico mostra como o Abono vem sendo usado e qual oportunidade existe para transformar esse dinheiro em patrimônio.</div>
@@ -481,31 +438,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
       <div class="perfil-banner-text" id="perfil-text"></div>
     </div>
 
-    <div class="result-mini-grid">
+    <div class="result-mini-grid" style="grid-template-columns:1fr">
       <div class="result-mini">
         <div class="result-mini-label">Abono estimado</div>
         <div class="result-mini-val" id="result-abono-anual">—</div>
-      </div>
-      <div class="result-mini">
-        <div class="result-mini-label">Histórico informado</div>
-        <div class="result-mini-val" id="result-anos">—</div>
       </div>
     </div>
 
     <div class="result-actions">
       <button class="btn-primary blue" onclick="mostrarRevelacao()">Ver minha simulação</button>
       <button class="btn-back" onclick="irPara(6)">Voltar para ajustar respostas</button>
-    </div>
-  </div>
-
-  <!-- Resultado passo REVELAÇÃO -->
-  <div class="result-step" id="result-step-rev" style="display:none">
-    <div style="background:linear-gradient(160deg,#001f4d 0%,#003366 100%);border-radius:22px;padding:3rem 2rem;text-align:center;margin-bottom:1rem;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-      <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem" id="rev-label">Com 50% do seu Abono investido por 10 anos</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:.75rem">você poderia ter acumulado</div>
-      <div style="font-family:'DM Serif Display',serif;font-size:52px;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem" id="rev-total">R$ 0</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:2.5rem">estimativa bruta · 10% a.a.</div>
-      <button style="background:#F47920;color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="irParaResultado(1)">Ver o detalhamento →</button>
     </div>
   </div>
 
@@ -519,9 +461,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
         <div class="tabela-control">
           <div class="tabela-control-top">
             <span>Percentual do Abono</span>
-            <strong><span id="pct-num">50</span>%</strong>
+            <strong><span id="pct-num">100</span>%</strong>
           </div>
-          <input type="range" id="pct-slider" min="10" max="100" value="50" step="5" oninput="atualizarPct()">
+          <input type="range" id="pct-slider" min="10" max="100" value="100" step="5" oninput="atualizarPct()">
           <div class="tabela-control-meta" id="pct-info">Equivale a <span id="pct-valor-reais">R$ 0</span> por ano</div>
         </div>
 
@@ -562,7 +504,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
     </div>
 
     <div class="result-actions two">
-      <button class="btn-back" onclick="irParaResultado(0)">Voltar</button>
+      <button class="btn-back" onclick="mostrarRevelacao()">Voltar</button>
       <button class="btn-primary blue" onclick="irParaResultado(2)">Próximo passo</button>
     </div>
   </div>
@@ -576,7 +518,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
         <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:12px">
           <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:5px">Você escolheu investir</div>
-          <div style="font-size:22px;font-weight:700;color:#fff" id="final-pct">50%</div>
+          <div style="font-size:22px;font-weight:700;color:#fff" id="final-pct">100%</div>
         </div>
         <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:12px">
           <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:5px">Valor anual estimado</div>
@@ -663,7 +605,9 @@ var SONHOS={
 };
 
 function mostrarRevelacao(){
-  var anos=parseInt(document.getElementById('proj-slider').value)||10;
+  PCT=100;
+  var projSlider=document.getElementById('proj-slider');
+  var anos=projSlider?parseInt(projSlider.value)||10:10;
   var abono=calcAbono(resp.salario);
   var valorInv=abono*(PCT/100);
   var total=valorInv*((Math.pow(1+TAXA,anos)-1)/TAXA);
@@ -674,21 +618,13 @@ function mostrarRevelacao(){
   rev.style.flexDirection='column';
 
   var label=document.getElementById('rev-label');
-  if(label) label.textContent='Com '+PCT+'% do seu Abono investido por '+anos+' '+(anos===1?'ano':'anos');
+  if(label) label.textContent='Com 100% do seu Abono investido por '+anos+' '+(anos===1?'ano':'anos');
 
   var totalEl=document.getElementById('rev-total');
   if(totalEl){
     totalEl.textContent='R$ 0';
     setTimeout(function(){countUp(totalEl, total, 1800);}, 300);
   }
-
-  document.querySelectorAll('.result-progress-dot').forEach(function(el,i){
-    el.classList.remove('active','done');
-    if(i===0) el.classList.add('done');
-    if(i===1) el.classList.add('active');
-  });
-  var lbl=document.getElementById('result-progress-label');
-  if(lbl) lbl.textContent='Passo 2 de 3 · Simulação';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -707,7 +643,11 @@ function selecionarSonho(key,el){
   document.querySelectorAll('.sonho-opt').forEach(function(o){o.classList.remove('selected');});
   el.classList.add('selected');
   SONHO_SELECIONADO=key;
-  setTimeout(function(){irPara(7);},350);
+  setTimeout(function(){
+    irPara(7);
+    gerarResultado();
+    mostrarRevelacao();
+  },350);
 }
 
 var CIDADES={
@@ -719,7 +659,7 @@ var CIDADES={
 };
 var CIDADE_SELECIONADA=null;
 var WHATS='554133079222', TAXA=0.10;
-var PCT=50, IR_IDX=4;
+var PCT=100, IR_IDX=4;
 var RESULT_STEP=0;
 var RESULT_TITULOS=['Seu perfil','Simulação','Próximo passo'];
 var resp={salario:4500,q2:0,q3:0,q4:0,q5:0};
@@ -760,7 +700,7 @@ function irPara(n){
 
 function reiniciar(){
   resp={salario:4500,q2:0,q3:0,q4:0,q5:0};
-  PCT=50;
+  PCT=100;
   IR_IDX=4;
   document.getElementById('salary-input').value='4.500';
   atualizarSalario();
@@ -772,7 +712,8 @@ function selecionarOpt(q,val,el){
   document.getElementById('opts'+q).querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected');});
   el.classList.add('selected');
   resp['q'+q]=val;
-  setTimeout(function(){irPara(q+1);},350);
+  var next={1:2, 2:5, 5:6}[q]||q+1;
+  setTimeout(function(){irPara(next);},350);
 }
 
 function selecionarOptIR(idx,el){
@@ -920,8 +861,8 @@ function atualizarProj(){
 function gerarResultado(){
   var anos=anosFromQ2();
   var abono=calcAbono(resp.salario);
-  PCT=50;
-  document.getElementById('pct-slider').value=50;
+  PCT=100;
+  document.getElementById('pct-slider').value=100;
   var valorInv=abono*(PCT/100);
   document.getElementById('pct-num').textContent=PCT;
   document.getElementById('pct-valor-reais').textContent=fmt(valorInv);
@@ -956,8 +897,7 @@ function gerarResultado(){
     text.textContent='Você acompanha o Abono e já tem um plano. Agora é formalizar no Viva Mais Previdência e ver os juros compostos trabalhando por você — e por '+sonhoTexto+'.';
   }
 
-  var prazoInicial=Math.max(1,anos||1);
-  prazoInicial=Math.min(prazoInicial,25);
+  var prazoInicial=10;
   var projSlider=document.getElementById('proj-slider');
   if(projSlider) projSlider.value=prazoInicial;
 
@@ -970,7 +910,7 @@ function gerarResultado(){
 
 
 function irParaResultado(idx){
-  RESULT_STEP=Math.max(0,Math.min(idx,2));
+  RESULT_STEP=Math.max(1,Math.min(idx,2));
   document.querySelectorAll('.result-step').forEach(function(el){
     el.classList.remove('active');
     el.style.display='none';
@@ -979,16 +919,6 @@ function irParaResultado(idx){
   if(rev) rev.style.display='none';
   var atual=document.getElementById('result-step-'+RESULT_STEP);
   if(atual){atual.style.display='block';atual.classList.add('active');}
-
-  document.querySelectorAll('.result-progress-dot').forEach(function(el,i){
-    el.classList.remove('active','done');
-    if(i<RESULT_STEP) el.classList.add('done');
-    if(i===RESULT_STEP) el.classList.add('active');
-  });
-
-  var label=document.getElementById('result-progress-label');
-  if(label) label.textContent='Passo '+(RESULT_STEP+1)+' de 3 · '+RESULT_TITULOS[RESULT_STEP];
-
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
