@@ -578,10 +578,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
   <div class="card-preview-wrap">
     <img id="card-img" src="" alt="Card Instagram Jornada do Cuidado">
   </div>
-  <div class="share-grid">
-    <button class="share-btn download" onclick="downloadCard()">
-      ⬇️ Baixar
-    </button>
+  <div class="share-grid" style="grid-template-columns:1fr">
     <button class="share-btn instagram" onclick="compartilharCard()">
       📲 Compartilhar
     </button>
@@ -629,14 +626,7 @@ function mostrarRevelacao(){
 }
 
 function countUp(el, target, duration){
-  var start=0;
-  var step=target/((duration||1000)/16);
-  var current=0;
-  var timer=setInterval(function(){
-    current+=step;
-    if(current>=target){current=target;clearInterval(timer);}
-    el.textContent='R$ '+Math.round(current).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-  },16);
+  el.textContent=fmt(target);
 }
 
 function selecionarSonho(key,el){
