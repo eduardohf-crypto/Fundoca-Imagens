@@ -280,10 +280,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
     <div style="position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%"></div>
     <div style="font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.25rem">Fusan · Diagnóstico Abono</div>
     <h1 style="font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:#fff;line-height:1.4;letter-spacing:.5px;margin-bottom:1rem">Seu Abono pode trabalhar<br>por <span style="color:#F47920;font-style:italic">você.</span></h1>
-    <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:2rem">Responda 4 perguntas e descubra quanto você já poderia ter acumulado — e o que ainda pode construir.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:2rem">Responda 3 perguntas e descubra quanto você já poderia ter acumulado — e o que ainda pode construir.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:2rem">
       <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:1rem;text-align:center">
-        <div style="font-size:24px;font-weight:700;color:#fff">4</div>
+        <div style="font-size:24px;font-weight:700;color:#fff">3</div>
         <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Perguntas rápidas</div>
       </div>
       <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:1rem;text-align:center">
@@ -299,9 +299,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 <div class="screen" id="s1">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div><div class="progress-step"></div>
+      <div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div>
     </div>
-    <div class="progress-label">Pergunta 1 de 4</div>
+    <div class="progress-label">Pergunta 1 de 3</div>
   </div>
   <div class="card">
     <div class="q-eyebrow">Pergunta 1 de 6</div>
@@ -323,37 +323,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 </div>
 
 <!-- S2: ANOS RECEBENDO -->
-<div class="screen" id="s2">
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div><div class="progress-step"></div>
-    </div>
-    <div class="progress-label">Pergunta 2 de 4</div>
-  </div>
-  <div class="card">
-    <div class="q-eyebrow">Pergunta 2 de 4</div>
-    <div class="q-text">Há quantos anos você recebe o Abono?</div>
-    <div class="options" id="opts2">
-      <button class="opt" onclick="selecionarOpt(2,1,this)"><span class="opt-num">1</span>Este é o meu primeiro ano</button>
-      <button class="opt" onclick="selecionarOpt(2,2,this)"><span class="opt-num">2</span>2 anos</button>
-      <button class="opt" onclick="selecionarOpt(2,3,this)"><span class="opt-num">3</span>3 anos</button>
-      <button class="opt" onclick="selecionarOpt(2,4,this)"><span class="opt-num">4</span>4 anos</button>
-      <button class="opt" onclick="selecionarOpt(2,5,this)"><span class="opt-num">5</span>5 anos ou mais</button>
-    </div>
-  </div>
-  <button class="btn-back" onclick="irPara(1)">Voltar</button>
-</div>
-
 <!-- S5: PLANO -->
 <div class="screen" id="s5">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div>
+      <div class="progress-step done"></div><div class="progress-step active"></div><div class="progress-step"></div>
     </div>
-    <div class="progress-label">Pergunta 3 de 4</div>
+    <div class="progress-label">Pergunta 2 de 3</div>
   </div>
   <div class="card">
-    <div class="q-eyebrow">Pergunta 3 de 4</div>
+    <div class="q-eyebrow">Pergunta 2 de 3</div>
     <div class="q-text">Qual é o seu plano para o Abono deste ano?</div>
     <div class="options" id="opts5">
       <button class="opt" onclick="selecionarOpt(5,1,this)"><span class="opt-num">1</span>Nenhum plano — provavelmente vai seguir o mesmo caminho dos anos anteriores</button>
@@ -362,19 +341,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
       <button class="opt" onclick="selecionarOpt(5,4,this)"><span class="opt-num">4</span>Já decidi investir — quero colocar no Viva Mais Previdência</button>
     </div>
   </div>
-  <button class="btn-back" onclick="irPara(2)">Voltar</button>
+  <button class="btn-back" onclick="irPara(1)">Voltar</button>
 </div>
 
 <!-- S6: IMPOSTO DE RENDA -->
 <div class="screen" id="s6">
   <div class="progress-wrap">
     <div class="progress-track">
-      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div>
+      <div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step active"></div>
     </div>
-    <div class="progress-label">Pergunta 4 de 4</div>
+    <div class="progress-label">Pergunta 3 de 3</div>
   </div>
   <div class="card">
-    <div class="q-eyebrow">Pergunta 4 de 4</div>
+    <div class="q-eyebrow">Pergunta 3 de 3</div>
     <div class="q-text">Qual é a sua faixa de Imposto de Renda?</div>
     <div class="options" id="opts6">
       <button class="opt" onclick="selecionarOptIR(0,this)"><span class="opt-num">1</span>Isento</button>
@@ -678,7 +657,7 @@ function atualizarSalario(){
 
 function avancarQ1(){
   if(!resp.salario||resp.salario<100){alert('Por favor, informe o seu salário bruto.');return;}
-  irPara(2);
+  irPara(5);
 }
 
 function irPara(n){
@@ -702,7 +681,7 @@ function selecionarOpt(q,val,el){
   document.getElementById('opts'+q).querySelectorAll('.opt').forEach(function(o){o.classList.remove('selected');});
   el.classList.add('selected');
   resp['q'+q]=val;
-  var next={1:2, 2:5, 5:6}[q]||q+1;
+  var next={1:5, 5:6}[q]||q+1;
   setTimeout(function(){irPara(next);},350);
 }
 
